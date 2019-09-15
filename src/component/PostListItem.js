@@ -7,66 +7,101 @@ import hoverCss from './hoverCss'
 const Wrapper = styled.div`
   ${hoverCss};
   margin: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.15);
+
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+
+  * {
+    color: #212529;
+  }
+`
+
+const Picture = styled.div`
   background-image: url(${props => props.img});
   background-position: center;
   background-repeat: no-repeat;
-  content: "";
-  display: block;
+  background-size: cover;
   padding-bottom: 100%;
-  position: relative;
+`
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  padding: 1rem;
 `
 
 const HeaderWrapper = styled.div`
-  background-color: white;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   display: flex;
-  padding-top: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
 `
 
 const Profile = styled.div`
   align-items: center;
   font-size: 1rem;
-  img {
-    margin-bottom: 0;
-    border-radius: 100%;
-    padding: 0.25rem;
-    min-width: 70px;
-  }
-  flex-basis: 20%;
+
+  flex-shrink: 0;
+  width: 45px;
+  height: 45px;
+
+  border-radius: 27.5px;
+  background-image: url(${props => props.img});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `
 
 const DescriptionWrapper = styled.div`
   flex-direction: column;
-  padding: 1rem 0.5rem;
-  width: 100%;
+  flex-grow: 1;
+  justify-content: flex-start;
+  margin-left: 1rem;
 `
 
 const Description = styled.p`
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.0;
   font-weight: bold;
   margin: 0;
+  padding-top: 0.3rem;
   text-align: left;
 `
 
 const DesciprionTime = styled.span`
-  font-size: 14px;
+  display: block;
+  font-size: 13px;
+  color: #adb5bd;
+  margin: 0;
 `
 
 const CallToAction = styled.div`
-  margin-top: 5px;
-  text-align: right;
-  font-weight: bold;
+  margin-top: 1rem;
+
+  a {
+    display: block;
+    padding: 4px 10px;
+
+    border-radius: 6px;
+    background-color: #228be6;
+
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+  }
 `
 
 TimeAgo.addLocale(en)
 const timeAgo = new TimeAgo('en-US')
 
 class PostListItem extends React.Component{
-   
+
   onClickGo = (e) => {
     e.preventDefault();
     window.open(this.props.facebookUrl);
@@ -81,25 +116,26 @@ class PostListItem extends React.Component{
       createdAt,
       facebookUrl,
     } = this.props;
-  
+
   return (
-    <Wrapper img={image}>
-      <HeaderWrapper>
-        <Profile>
-          <img src={userProfileImage}/>
-        </Profile>
-        <DescriptionWrapper>
-          <Description>
-            {description}
+    <Wrapper>
+      <Picture img={image} />
+      <Content>
+        <HeaderWrapper>
+          <Profile img={userProfileImage} />
+          <DescriptionWrapper>
+            <Description>
+              {description}
+            </Description>
             <DesciprionTime>
               {' ' + timeAgo.format(new Date(createdAt), 'twitter')} ago
             </DesciprionTime>
-          </Description>
-          <CallToAction>
-            <span onClick={this.onClickGo}>I WANT TO GO</span>
-          </CallToAction>
-        </DescriptionWrapper>
-      </HeaderWrapper>
+          </DescriptionWrapper>
+        </HeaderWrapper>
+        <CallToAction>
+          <a onClick={this.onClickGo}>Join</a>
+        </CallToAction>
+      </Content>
     </Wrapper>
   )
   }

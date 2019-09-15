@@ -5,7 +5,7 @@ const Wrapper = styled.div`
     text-align: left;
     font-size: 3rem;
     font-weight: bold;
-    line-height: 2rem;
+    line-height: 3.5rem;
 `
 
 

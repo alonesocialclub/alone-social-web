@@ -5,11 +5,10 @@ import { media } from '../utils/media'
 const Warpper = styled.div`
   padding: 50px;
   transition: all 0.3s ease;
-  ${media.mobile`padding: 30px 20px;`}
+  ${media.mobile`padding: 45px 30px;`}
 `
 const Content = styled.div`
   margin: 0 auto;
-  text-align: center;
   max-width: 480px;
 `
 

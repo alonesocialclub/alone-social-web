@@ -7,7 +7,6 @@ import Logo from './Logo';
 
 const Wrapper = styled.div`
   margin: 0 auto;
-  text-align: center;
   max-width: 480px;
   `
 
