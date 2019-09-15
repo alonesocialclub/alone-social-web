@@ -2,6 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 import Layout from '../component/Layout';
+import PostListItem from '../component/PostListItem'
 
 
 class PostTemplate extends React.Component {
@@ -28,7 +29,10 @@ class PostTemplate extends React.Component {
     return (
       <Layout>
         <Helmet meta={meta}>
-          <title>{title}</title>
+          gigihihihi
+          <PostListItem
+            {...post.frontmatter}
+          />
         </Helmet>
       </Layout>
     )
@@ -40,7 +44,6 @@ export default PostTemplate
 export const query = graphql`
   query BlogPostQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
       frontmatter {
         image
         username
