@@ -9,7 +9,6 @@ const Warpper = styled.div`
 `
 const Content = styled.div`
   margin: 0 auto;
-  text-align: center;
   max-width: 480px;
 `
 
