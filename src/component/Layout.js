@@ -13,7 +13,7 @@ const Content = styled.div`
 `
 
 class Layout extends React.Component {
-  render() {;
+  render() {
     return (
         <Warpper>
           <Content>{this.props.children}</Content>
