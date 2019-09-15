@@ -2,19 +2,19 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 import Layout from '../component/Layout';
+import Logo from '../component/Logo';
 import PostListItem from '../component/PostListItem'
 
 
 class PostTemplate extends React.Component {
 
-  render() {
-    const post = this.props.data.markdownRemark
+  getMeta = () => {
     const { 
       title,
       description,
       keywords = [],
-      image = '/img/og.jpeg',
-    } = post.frontmatter;
+      image,
+    } = this.props.data.markdownRemark.frontmatter;
     const imageUrl = 'https://www.alone.social' + image;
     const meta = [
       {name: 'title', content: title},
@@ -25,15 +25,16 @@ class PostTemplate extends React.Component {
       {property: 'og:title', content: title},
       {property: 'og:image', content: imageUrl},
     ]
-
+    return meta;
+  }
+  render() {
     return (
       <Layout>
-        <Helmet meta={meta}>
-          gigihihihi
-          <PostListItem
-            {...post.frontmatter}
-          />
-        </Helmet>
+        <Helmet meta={this.getMeta()}/>
+        <Logo/>
+        <PostListItem
+          {...this.props.data.markdownRemark.frontmatter}
+        />
       </Layout>
     )
   }

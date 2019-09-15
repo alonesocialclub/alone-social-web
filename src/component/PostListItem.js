@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import hoverCss from './hoverCss'
 
 const Wrapper = styled.div`
-${hoverCss};
+  ${hoverCss};
   margin: 3rem 0;
   background-image: url(${props => props.img});
   background-position: center;
@@ -39,19 +39,15 @@ const Profile = styled.div`
 `
 
 const DescriptionWrapper = styled.div`
-  display: flex;
   flex-direction: column;
-  flex: 1;
   padding: 1rem 0.5rem;
-  justify-content: space-between;
+  width: 100%;
 `
 
 const Description = styled.p`
   font-size: 20px;
+  line-height: 1.0;
   font-weight: bold;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
   margin: 0;
   text-align: left;
 `
@@ -61,46 +57,54 @@ const DesciprionTime = styled.span`
 `
 
 const CallToAction = styled.div`
+  margin-top: 5px;
   text-align: right;
-
-  a{
-    font-weight: bold;
-  &:visited {
-    color: inherit;
-    }
-  }
-
+  font-weight: bold;
 `
 
 TimeAgo.addLocale(en)
 const timeAgo = new TimeAgo('en-US')
 
-const PostListItem = ({ 
-  image,
-  username,
-  userProfileImage,
-  description,
-  createdAt,
-  facebookUrl,
- }) => (
-  <Wrapper img={image}>
-    <HeaderWrapper>
-      <Profile>
-        <img src={userProfileImage}/>
-      </Profile>
-      <DescriptionWrapper>
-        <Description>
-          {description}
-          <DesciprionTime>
-            ({timeAgo.format(new Date(createdAt), 'twitter')} ago)
-          </DesciprionTime>
-        </Description>
-        <CallToAction>
-          <a href={facebookUrl} target="_blank">I WANT TO GO</a>
-        </CallToAction>
-      </DescriptionWrapper>
-    </HeaderWrapper>
-  </Wrapper>
-)
+class PostListItem extends React.Component{
+   
+  onClickGo = (e) => {
+    e.preventDefault();
+    window.open(this.props.facebookUrl);
+  }
+
+  render(){
+    const {
+      image,
+      username,
+      userProfileImage,
+      description,
+      createdAt,
+      facebookUrl,
+    } = this.props;
+  
+  return (
+    <Wrapper img={image}>
+      <HeaderWrapper>
+        <Profile>
+          <img src={userProfileImage}/>
+        </Profile>
+        <DescriptionWrapper>
+          <Description>
+            {description}
+            <DesciprionTime>
+              {' ' + timeAgo.format(new Date(createdAt), 'twitter')} ago
+            </DesciprionTime>
+          </Description>
+          <CallToAction>
+            <span onClick={this.onClickGo}>I WANT TO GO</span>
+          </CallToAction>
+        </DescriptionWrapper>
+      </HeaderWrapper>
+    </Wrapper>
+  )
+  }
+}
+
+
 
 export default PostListItem
