@@ -9,7 +9,7 @@ class IndexPage extends React.Component {
     render() {
         const title = 'Alone Social';
         const description = 'Work alone, together';
-        const image = 'https://alone.social/img/og.jpeg';
+        const image = 'https://alone.social/img/logo.png';
         return (
             <Layout>
                 <Helmet meta={
