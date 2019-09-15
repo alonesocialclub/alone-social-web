@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Alone Social`,
     image: `/img/og.jpeg`,
-    siteUrl: `https://www.alone.social`,
+    siteUrl: `https://alone.social`,
   },
   plugins: [
     {

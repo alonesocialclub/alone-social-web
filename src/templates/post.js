@@ -15,7 +15,7 @@ class PostTemplate extends React.Component {
       keywords = [],
       image,
     } = this.props.data.markdownRemark.frontmatter;
-    const imageUrl = 'https://www.alone.social' + image;
+    const imageUrl = 'https://alone.social' + image;
     const meta = [
       {name: 'title', content: title},
       {name: 'description', content: description},
