@@ -5,30 +5,20 @@ import hoverCss from './hoverCss'
 const Wrapper = styled.div`
   margin-bottom: 2rem;
   text-align: center;
-  padding: 1rem;
-  ${hoverCss}
+  ${hoverCss};
+  background-image: url(${props => props.img});
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  position: relative; /* If you want text inside of it */
+  margin: 1rem 0;
 `
 
-const Meta = styled.div`
-  font-size: 0.75rem;
+const HeaderWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  background-color: red;
+  display: flex;
 `
-
-const Title = styled.div`
-  font-weight: bold;
-  font-size: 1.4rem;
-  line-height: 1.4;
-  margin: 0.2rem 0;
-`
-
-const Description = styled.div`
-  color: #333333;
-  font-size: 0.8rem;
-  line-height: 1.2rem;
-`
-
-const maxLength = 100;
-
-
 
 
 const PostListItem = ({ 
@@ -40,14 +30,17 @@ const PostListItem = ({
   createdAt,
   facebookUrl,
  }) => (
-  <Wrapper>
-    {image}
-    {username}
-    {userProfileImage}
-    {description}
-    {keywords}
-    {createdAt}
-    {facebookUrl}
+  <Wrapper img={image}>
+    <HeaderWrapper>
+      <div>
+        {username}
+        <img src={userProfileImage}/> 
+      </div>
+      {description}
+      {keywords}
+      {createdAt}
+      {facebookUrl}
+    </HeaderWrapper>
   </Wrapper>
 )
 
