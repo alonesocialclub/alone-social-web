@@ -17,13 +17,13 @@ class PostTemplate extends React.Component {
     } = this.props.data.markdownRemark.frontmatter;
     const imageUrl = 'https://alone.social' + image;
     const meta = [
-      {name: 'title', content: title},
-      {name: 'description', content: description},
-      {name: 'keywords', content: [keywords,title].join(',')},
+      {name: 'title', content: description},
+      {property: 'og:title', content: description},
+      {name: 'description', content: "Join now"},
+      {property: 'og:description', content: "Join now"},
       {name: 'image', content: imageUrl},
-      {property: 'og:description', content: description},
-      {property: 'og:title', content: title},
       {property: 'og:image', content: imageUrl},
+      {name: 'keywords', content: [keywords,title].join(',')},
     ]
     return meta;
   }
