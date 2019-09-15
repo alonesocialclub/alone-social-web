@@ -1,0 +1,3 @@
+Sitemap: https://www.alone.social/sitemap.xml
+User-agent: *
+Disallow:
