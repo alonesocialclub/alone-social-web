@@ -1,6 +1,8 @@
 import React from 'react'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+
+import ga from '../../src/utils/ga';
 import styled from 'styled-components'
 import hoverCss from './hoverCss'
 
@@ -95,52 +97,57 @@ const CallToAction = styled.div`
     font-weight: bold;
     cursor: pointer;
   }
-`
+`;
 
-TimeAgo.addLocale(en)
-const timeAgo = new TimeAgo('en-US')
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo('en-US');
 
-class PostListItem extends React.Component{
+class PostListItem extends React.Component {
 
-  onClickGo = (e) => {
-    e.preventDefault();
-    window.open(this.props.facebookUrl);
-  }
+    onClickGo = (e) => {
+        const {facebookUrl} = this.props;
+        e.preventDefault();
+        ga.event({
+            category: 'Post',
+            action: 'Click Join',
+            label: facebookUrl,
+        });
+        window.open(facebookUrl);
+    };
 
-  render(){
-    const {
-      image,
-      username,
-      userProfileImage,
-      description,
-      createdAt,
-      facebookUrl,
-    } = this.props;
+    render() {
+        const {
+            image,
+            username,
+            userProfileImage,
+            description,
+            createdAt,
+            facebookUrl,
+        } = this.props;
 
-  return (
-    <Wrapper>
-      <Picture img={image} />
-      <Content>
-        <HeaderWrapper>
-          <Profile img={userProfileImage} />
-          <DescriptionWrapper>
-            <Description>
-              {description}
-            </Description>
-            <DesciprionTime>
-              {' ' + timeAgo.format(new Date(createdAt), 'twitter')} ago
-            </DesciprionTime>
-          </DescriptionWrapper>
-        </HeaderWrapper>
-        <CallToAction>
-          <a onClick={this.onClickGo}>Join</a>
-        </CallToAction>
-      </Content>
-    </Wrapper>
-  )
-  }
+        return (
+            <Wrapper>
+                <Picture img={image}/>
+                <Content>
+                    <HeaderWrapper>
+                        <Profile img={userProfileImage}/>
+                        <DescriptionWrapper>
+                            <Description>
+                                {description}
+                            </Description>
+                            <DesciprionTime>
+                                {' ' + timeAgo.format(new Date(createdAt), 'twitter')} ago
+                            </DesciprionTime>
+                        </DescriptionWrapper>
+                    </HeaderWrapper>
+                    <CallToAction>
+                        <a onClick={this.onClickGo}>Join</a>
+                    </CallToAction>
+                </Content>
+            </Wrapper>
+        )
+    }
 }
-
 
 
 export default PostListItem
